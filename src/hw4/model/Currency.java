@@ -10,8 +10,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-
-public class Currency implements Serializable {
+public class Currency implements Serializable, CurrencyDTO {
 
 	   
 	@Id
@@ -20,10 +19,13 @@ public class Currency implements Serializable {
 	private Integer id;
 	
 	@Column(nullable=false)
-	private String country;
+	private String countryName;
 	
 	@Column(nullable=false)
-	private String name;
+	private String currencyName;
+
+	@Column(nullable=false)
+	private String currencyCode;
 	
 	@Column(nullable=false)
 	private double baseCurrencyRate;
@@ -32,6 +34,48 @@ public class Currency implements Serializable {
 
 	public Currency() {
 		super();
+	}
+	
+	public Currency(String countryName, String currencyName,String currencyCode, double exchangeRate) {
+		this.countryName = countryName;
+		this.currencyName = currencyName;
+		this.currencyCode = currencyCode;
+		this.baseCurrencyRate = exchangeRate;
+	}
+	
+	@Override
+	public String getCountryName() {
+		return countryName;
+	}
+
+	@Override
+	public String getCurrencyName() {
+		return currencyName;
+	}
+
+	@Override
+	public double getBaseCurrencyRate() {
+		return baseCurrencyRate;
+	}
+
+	@Override
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+
+	@Override
+	public void setCurrencyName(String currencyName) {
+		this.currencyName = currencyName;
+	}
+
+	@Override
+	public void setBaseCurrencyRate(double rate) {
+		this.baseCurrencyRate = rate;
+	}
+
+	@Override
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
    
 }

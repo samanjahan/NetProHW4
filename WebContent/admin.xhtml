@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+<title>Welcome to the Currency converter</title>
+</head>
+<body>
+	<h1>Admin page</h1>
+	<h:form>
+		<h3>Create a New Currency</h3>
+		<p>
+			<h:outputLabel for="currencyCountry" value="Name of the country: " />
+			<h:inputText id="currencyCountry" value="#{currencyManager.newCountryName}" required="true" />
+			
+			<h:outputLabel for="currencyName" value="Name of the currency: " />
+			<h:inputText id="currencyName" value="#{currencyManager.newCurrencyName}" required="true" />
+			
+			<h:outputLabel for="currencyCode" value="Code of the currency: " />
+			<h:inputText id="currencyCode"	value="#{currencyManager.newCurrencyCode}" required="true" />
+			
+			<h:outputLabel for="exchangeRate" value="Exchange rate towards Swedish Krona: " />
+			<h:inputText id="exchangeRate"	value="#{currencyManager.newExchangeRate}" required="true" />
+		</p>
+		<p>
+			<h:commandButton value="Create Currency"
+				action="#{currencyManager.createCurrency}" />
+		</p>
+		<hr />
+	</h:form>
+</body>
+</html>
