@@ -5,7 +5,7 @@
     <jta-data-source>jdbc/hw4</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-    	<property name="javax.persistence.schema-generation.database.action" value="create"/>
+    	<property name="eclipselink.jdbc.batch-writing" value="Oracle-JDBC"/>
     </properties>
   </persistence-unit>
 </persistence>
