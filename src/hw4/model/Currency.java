@@ -9,21 +9,19 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Currency
  *
  */
+@NamedQueries({@NamedQuery(name = "findAllCurrencies", query = "SELECT Name FROM Currency Name")})
+
 @Entity
 public class Currency implements Serializable, CurrencyDTO {
 
-	   
-	@Id
-	@Column(name="id", nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
 	
 	@Column(nullable=false)
 	private String countryName;
 	
 	@Column(nullable=false)
 	private String currencyName;
-
+	
+	@Id
 	@Column(nullable=false)
 	private String currencyCode;
 	
@@ -43,39 +41,38 @@ public class Currency implements Serializable, CurrencyDTO {
 		this.baseCurrencyRate = exchangeRate;
 	}
 	
-	@Override
-	public String getCountryName() {
+	public String getCountryName(){
 		return countryName;
 	}
 
-	@Override
 	public String getCurrencyName() {
 		return currencyName;
 	}
 
-	@Override
 	public double getBaseCurrencyRate() {
 		return baseCurrencyRate;
 	}
 
-	@Override
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
 	}
 
-	@Override
 	public void setCurrencyName(String currencyName) {
 		this.currencyName = currencyName;
 	}
 
-	@Override
 	public void setBaseCurrencyRate(double rate) {
 		this.baseCurrencyRate = rate;
 	}
 
-	@Override
 	public String getCurrencyCode() {
 		return currencyCode;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return countryName + " " + currencyName;
 	}
    
 }

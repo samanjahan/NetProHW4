@@ -3,7 +3,9 @@ package hw4.view;
 import hw4.controller.CurrencyController;
 import hw4.model.CurrencyDTO;
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -25,6 +27,8 @@ public class CurrencyManager implements Serializable {
     private Double newExchangeRate;
     private String searchedCurrency;
     private Exception transactionFailure;
+    private List<CurrencyDTO> currencies;
+    private String fromCurrency;
     @Inject
     private Conversation conversation;
 
@@ -113,9 +117,21 @@ public class CurrencyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
+    
+    public void remove(){
+    	System.out.println("hahahahaha" + fromCurrency);
+    }
 
 	public String getNewCountryName() {
 		return newCountryName;
+	}
+	
+	public void SetFromCurrency(String fromCurrency){
+		this.fromCurrency = fromCurrency;
+	}
+	
+	public String getFromCurrency(){
+		return fromCurrency;
 	}
 
 	public void setNewCountryName(String newCountryName) {
@@ -144,5 +160,15 @@ public class CurrencyManager implements Serializable {
 
 	public void setNewExchangeRate(Double newExchangeRate) {
 		this.newExchangeRate = newExchangeRate;
+	}
+	
+	public List<CurrencyDTO> setCurrencies(){
+		return currencies;
+		
+	}
+		
+	public List<CurrencyDTO> getCurrencies(){
+		currencies = currencyController.getAllCurrencys();
+		return currencies;
 	}
 }
