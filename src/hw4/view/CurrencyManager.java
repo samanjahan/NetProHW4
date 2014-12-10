@@ -24,13 +24,15 @@ public class CurrencyManager implements Serializable {
     private CurrencyDTO chosenCurrencyForUpdate;
 	private String newCountryName;
     private String newCurrencyName;
+    private double amountToConvert;
+    private double result;
     private String newCurrencyCode;
     private Double newExchangeRate;
     private String searchedCurrency;
     private Exception transactionFailure;
     private List<CurrencyDTO> currencies;
-    private String fromCurrency;
-    private String toCurrency;
+    private CurrencyDTO fromCurrency;
+    private CurrencyDTO toCurrency;
     @Inject
     private Conversation conversation;
 
@@ -52,10 +54,11 @@ public class CurrencyManager implements Serializable {
         transactionFailure = e;
     }
 
+    /*
     private void readCurrencyData() {
     	searchedCurrency = currentCurrency.getCurrencyCode();
         findCurrency();
-    }
+    }*/
 
     /**
      * @return <code>true</code> if the latest transaction succeeded, otherwise
@@ -152,23 +155,6 @@ public class CurrencyManager implements Serializable {
 	public String getNewCountryName() {
 		return newCountryName;
 	}
-	
-	public void SetFromCurrency(String fromCurrency){
-		this.fromCurrency = fromCurrency;
-	}
-	
-	public String getFromCurrency(){
-		return fromCurrency;
-	}
-	
-	
-	public void SetToCurrency(String toCurrency){
-		this.toCurrency = toCurrency;
-	}
-	
-	public String getToCurrency(){
-		return toCurrency;
-	}
 
 	public void setNewCountryName(String newCountryName) {
 		this.newCountryName = newCountryName;
@@ -226,7 +212,40 @@ public class CurrencyManager implements Serializable {
 		this.chosenCurrencyForUpdate = chosenCurrencyForUpdate;
 	}
 	
-	public String convert(){
-		return "ok!";
+	public CurrencyDTO getFromCurrency() {
+		return fromCurrency;
+	}
+
+	public void setFromCurrency(CurrencyDTO fromCurrency) {
+		this.fromCurrency = fromCurrency;
+	}
+
+	public CurrencyDTO getToCurrency() {
+		return toCurrency;
+	}
+
+	public void setToCurrency(CurrencyDTO toCurrency) {
+		this.toCurrency = toCurrency;
+	}
+
+	public double getAmountToConvert() {
+		return amountToConvert;
+	}
+
+	public void setAmountToConvert(double amountToConvert) {
+		this.amountToConvert = amountToConvert;
+	}
+	
+	public double getResult() {
+		return result;
+	}
+
+	public void setResult(double result) {
+		this.result = result;
+	}
+
+	public void convert(){
+		result = currencyFacade.convert(amountToConvert, fromCurrency, toCurrency);
+		System.out.println(result);
 	}
 }
