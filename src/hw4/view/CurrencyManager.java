@@ -3,7 +3,6 @@ package hw4.view;
 import hw4.controller.CurrencyFacade;
 import hw4.model.CurrencyDTO;
 
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +19,9 @@ public class CurrencyManager implements Serializable {
     private static final long serialVersionUID = 16247164405L;
     @EJB
     private CurrencyFacade currencyFacade;
-    private CurrencyDTO currentCurrency;
+	private CurrencyDTO currentCurrency;
     private String chosenCurrency;
+    private CurrencyDTO chosenCurrency2;
 	private String newCountryName;
     private String newCurrencyName;
     private String newCurrencyCode;
@@ -125,7 +125,19 @@ public class CurrencyManager implements Serializable {
     	try {
             startConversation();
             transactionFailure = null;
-            currencyFacade.deleteCurrencyByName(chosenCurrency);
+            currencyFacade.deleteCurrencyFromString(chosenCurrency);
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }
+    
+    public String deleteCurrency2() {
+    	System.out.println("Delete " + chosenCurrency2);
+    	try {
+            startConversation();
+            transactionFailure = null;
+            currencyFacade.deleteCurrency(chosenCurrency2);
         } catch (Exception e) {
             handleException(e);
         }
@@ -199,6 +211,16 @@ public class CurrencyManager implements Serializable {
 	public void setChosenCurrency(String chosenCurrency) {
 		System.out.println("Set Chosen " + chosenCurrency);
 		this.chosenCurrency = chosenCurrency;
+	}
+	
+    public CurrencyDTO getChosenCurrency2() {
+    	System.out.println("Get Chosen2 " + chosenCurrency2);
+    	return chosenCurrency2;
+	}
+
+	public void setChosenCurrency2(CurrencyDTO chosenCurrency2) {
+		System.out.println("Set Chosen2 " + chosenCurrency2);
+		this.chosenCurrency2 = chosenCurrency2;
 	}
 	
 	public String convert(){
