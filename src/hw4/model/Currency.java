@@ -3,6 +3,7 @@ package hw4.model;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +12,8 @@ import javax.persistence.*;
  */
 @NamedQueries({
 	@NamedQuery(name = "findAllCurrencies", query = "SELECT Name FROM Currency Name"),
-	@NamedQuery(name = "findCurrencyByName", query = "DELETE FROM Currency Name where Name.currencyName = :currencyName")})
+	@NamedQuery(name = "deleteCurrencyByName", query = "DELETE FROM Currency Name where Name.currencyName = :currencyName"),
+	@NamedQuery(name = "findCurrencyByName", query = "SELECT Name FROM Currency Name where Name.currencyName = :currencyName")})
 
 @Entity
 public class Currency implements Serializable, CurrencyDTO {
@@ -20,7 +22,7 @@ public class Currency implements Serializable, CurrencyDTO {
 	@Column(nullable=false)
 	private String countryName;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, unique= true)
 	private String currencyName;
 	
 	@Id
@@ -74,7 +76,12 @@ public class Currency implements Serializable, CurrencyDTO {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return currencyName;
+		return currencyCode;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.toString().equals(obj.toString());
 	}
    
 }

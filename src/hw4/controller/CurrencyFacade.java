@@ -45,7 +45,23 @@ import javax.persistence.PersistenceContext;
 	    }
 
 		public void deleteCurrencyByName(String chosenCurrency) {
-			em.createNamedQuery("findCurrencyByName").setParameter("currencyName", chosenCurrency).executeUpdate();
+			em.createNamedQuery("deleteCurrencyByName").setParameter("currencyName", chosenCurrency).executeUpdate();
 		}
+		
+		public void deleteCurrency(CurrencyDTO chosenCurrency) {
+			Currency currency = em.find(Currency.class, chosenCurrency.getCurrencyCode());
+			em.remove(currency);
+		}
+		
+		public void deleteCurrencyFromString(String chosenCurrency) {
+			Currency currency = em.find(Currency.class, findCurrency(chosenCurrency).getCurrencyCode());
+			em.remove(currency);
+		}
+		
+		public CurrencyDTO findCurrencyByName(String chosenCurrency) {
+			CurrencyDTO currency = em.createNamedQuery("findCurrencyByName", CurrencyDTO.class).setParameter("currencyName", chosenCurrency).getSingleResult();
+			return currency;
+		}
+		
 
 	}
