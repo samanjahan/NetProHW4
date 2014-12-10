@@ -62,6 +62,11 @@ import javax.persistence.PersistenceContext;
 			CurrencyDTO currency = em.createNamedQuery("findCurrencyByName", CurrencyDTO.class).setParameter("currencyName", chosenCurrency).getSingleResult();
 			return currency;
 		}
+
+		public void updateCurrency(CurrencyDTO chosenCurrencyForUpdate, double newRate) {
+			System.out.println("Inside cf Update " + chosenCurrencyForUpdate + " to " +  newRate);
+			em.createNamedQuery("updateCurrency").setParameter("currencyName", chosenCurrencyForUpdate.getCurrencyCode()).setParameter("newRate", newRate).executeUpdate();
+		}
 		
 
 	}
