@@ -1,6 +1,6 @@
 package hw4.view;
 
-import hw4.controller.CurrencyController;
+import hw4.controller.CurrencyFacade;
 import hw4.model.CurrencyDTO;
 
 import java.awt.event.ActionEvent;
@@ -19,9 +19,10 @@ public class CurrencyManager implements Serializable {
 
     private static final long serialVersionUID = 16247164405L;
     @EJB
-    private CurrencyController currencyController;
+    private CurrencyFacade currencyFacade;
     private CurrencyDTO currentCurrency;
-    private String newCountryName;
+    private String chosenCurrency;
+	private String newCountryName;
     private String newCurrencyName;
     private String newCurrencyCode;
     private Double newExchangeRate;
@@ -93,7 +94,7 @@ public class CurrencyManager implements Serializable {
         try {
             startConversation();
             transactionFailure = null;
-            currentCurrency = currencyController.findCurrency(searchedCurrency);
+            currentCurrency = currencyFacade.findCurrency(searchedCurrency);
         } catch (Exception e) {
             handleException(e);
         }
@@ -112,7 +113,19 @@ public class CurrencyManager implements Serializable {
         try {
             startConversation();
             transactionFailure = null;
-            currentCurrency = currencyController.createCurrency(newCountryName,newCurrencyName,newCurrencyCode,newExchangeRate);
+            currentCurrency = currencyFacade.createCurrency(newCountryName,newCurrencyName,newCurrencyCode,newExchangeRate);
+        } catch (Exception e) {
+            handleException(e);
+        }
+        return jsf22Bugfix();
+    }
+    
+    public String deleteCurrency() {
+    	System.out.println("Delete " + chosenCurrency);
+    	try {
+            startConversation();
+            transactionFailure = null;
+            currencyFacade.deleteCurrencyByName(chosenCurrency);
         } catch (Exception e) {
             handleException(e);
         }
@@ -174,8 +187,18 @@ public class CurrencyManager implements Serializable {
 	}
 		
 	public List<CurrencyDTO> getCurrencies(){
-		currencies = currencyController.getAllCurrencys();
+		currencies = currencyFacade.getAllCurrencys();
 		return currencies;
+	}
+	
+    public String getChosenCurrency() {
+    	System.out.println("Get Chosen " + chosenCurrency);
+		return chosenCurrency;
+	}
+
+	public void setChosenCurrency(String chosenCurrency) {
+		System.out.println("Set Chosen " + chosenCurrency);
+		this.chosenCurrency = chosenCurrency;
 	}
 	
 	public String convert(){

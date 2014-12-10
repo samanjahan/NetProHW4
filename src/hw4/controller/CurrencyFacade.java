@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	@Stateless
-	public class CurrencyController {
+	public class CurrencyFacade {
 	    @PersistenceContext(unitName = "convertPU")
 	    private EntityManager em;
 
@@ -43,5 +43,9 @@ import javax.persistence.PersistenceContext;
 	    public List<CurrencyDTO> getAllCurrencys(){
 	    	return em.createNamedQuery("findAllCurrencies", CurrencyDTO.class).getResultList();
 	    }
+
+		public void deleteCurrencyByName(String chosenCurrency) {
+			em.createNamedQuery("findCurrencyByName").setParameter("currencyName", chosenCurrency).executeUpdate();
+		}
 
 	}

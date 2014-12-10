@@ -72,21 +72,19 @@
 							</div>
 						</h:form>
 					</div>
-
-
 					<div class="col-lg-4 col-lg-offset-2">
+						<h3>Delete Currency</h3>
 						<h:form>
-							<h:selectOneListbox value="" size="14" style="width:200px">
-
-								<c:forEach var="item" items='${currencyManager.currencies}'>
-									<f:selectItem itemValue="${item}" itemLabel="${item}">
-									</f:selectItem>
-									<h:inputHidden vale ="#{currencyManager.chooseCurrentCurrency}"></h:inputHidden>
-								</c:forEach>
+							<h:selectOneListbox value="#{currencyManager.chosenCurrency}">
+								<f:selectItems value="#{currencyManager.currencies}" />
 							</h:selectOneListbox>
+							<div class="col-lg-8 col-xs-8">
+								<h:commandButton value="Delete"
+									action="#{currencyManager.deleteCurrency}"
+									class="btn btn-primary" />
+							</div>
 						</h:form>
 					</div>
-
 				</div>
 			</div>
 		</div>

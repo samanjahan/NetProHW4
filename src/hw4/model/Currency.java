@@ -9,7 +9,9 @@ import javax.persistence.*;
  * Entity implementation class for Entity: Currency
  *
  */
-@NamedQueries({@NamedQuery(name = "findAllCurrencies", query = "SELECT Name FROM Currency Name"),})
+@NamedQueries({
+	@NamedQuery(name = "findAllCurrencies", query = "SELECT Name FROM Currency Name"),
+	@NamedQuery(name = "findCurrencyByName", query = "DELETE FROM Currency Name where Name.currencyName = :currencyName")})
 
 @Entity
 public class Currency implements Serializable, CurrencyDTO {
@@ -72,7 +74,7 @@ public class Currency implements Serializable, CurrencyDTO {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return countryName + " " + currencyName;
+		return currencyName;
 	}
    
 }
