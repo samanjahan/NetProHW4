@@ -67,6 +67,14 @@ import javax.persistence.PersistenceContext;
 			System.out.println("Inside cf Update " + chosenCurrencyForUpdate + " to " +  newRate);
 			em.createNamedQuery("updateCurrency").setParameter("currencyName", chosenCurrencyForUpdate.getCurrencyCode()).setParameter("newRate", newRate).executeUpdate();
 		}
+
+		public double convert(double amountToConvert, CurrencyDTO fromCurrency, CurrencyDTO toCurrency) {			
+			double rate1 = findCurrency(fromCurrency.getCurrencyCode()).getBaseCurrencyRate();
+			double rate2 = findCurrency(toCurrency.getCurrencyCode()).getBaseCurrencyRate();
+			System.out.println("Amount = " + amountToConvert + " rate1 =  " + rate1 + " rate 2 = " + rate2);
+			System.out.println(amountToConvert * rate1 / rate2);
+			return (amountToConvert * rate1 / rate2);			
+		}
 		
 
 	}

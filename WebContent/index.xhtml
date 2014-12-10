@@ -34,25 +34,24 @@
 								<td>Result:</td>
 							</tr>
 							<tr>
-									<td><h:inputText for="currencyCode" class="form-control" />
+									<td><h:inputText value="#{currencyManager.amountToConvert}" class="form-control" /></td>
+									<td>
+										<h:selectOneMenu value="#{currencyManager.fromCurrency}" converter="cConverter">
+										<f:selectItems value="#{currencyManager.currencies}" />
+										</h:selectOneMenu>
+									</td>	
+									<td>
+										<h:selectOneMenu value="#{currencyManager.toCurrency}" converter="cConverter">
+										<f:selectItems value="#{currencyManager.currencies}" />
+										</h:selectOneMenu>
 									</td>
 									<td>
-									<h:selectOneListbox>
-										<c:forEach var="item" items='${currencyManager.currencies}'>
-											<f:converter converterId="keyConverter"/>
-											<f:selectItem  value="${currencyManager.fromCurrency}" itemLabel="${item}"></f:selectItem>						
-									</c:forEach></h:selectOneListbox></td>
-									<td>
-									<h:selectOneListbox>
-										<c:forEach var="item" items='${currencyManager.currencies}'>
-											<f:converter converterId="keyConverter"/>
-											<f:selectItem  value="${currencyManager.toCurrency}" itemLabel="${item}"></f:selectItem>						
-									</c:forEach></h:selectOneListbox></td>
-								
+										<h:outputText value="#{currencyManager.result}" />
+									</td>
 							</tr>
 						</table>
-							<h:commandButton value="Create Currency"
-										action="${currencyManager.convert}"
+							<h:commandButton value="Convert"
+										action="#{currencyManager.convert}"
 										class="btn btn-primary" />
 						</h:form>
 					</div>
