@@ -29,6 +29,7 @@ public class CurrencyManager implements Serializable {
     private Exception transactionFailure;
     private List<CurrencyDTO> currencies;
     private String fromCurrency;
+    private String toCurrency;
     @Inject
     private Conversation conversation;
 
@@ -117,10 +118,6 @@ public class CurrencyManager implements Serializable {
         }
         return jsf22Bugfix();
     }
-    
-    public void remove(){
-    	System.out.println("hahahahaha" + fromCurrency);
-    }
 
 	public String getNewCountryName() {
 		return newCountryName;
@@ -132,6 +129,15 @@ public class CurrencyManager implements Serializable {
 	
 	public String getFromCurrency(){
 		return fromCurrency;
+	}
+	
+	
+	public void SetToCurrency(String toCurrency){
+		this.toCurrency = toCurrency;
+	}
+	
+	public String getToCurrency(){
+		return toCurrency;
 	}
 
 	public void setNewCountryName(String newCountryName) {
@@ -170,5 +176,9 @@ public class CurrencyManager implements Serializable {
 	public List<CurrencyDTO> getCurrencies(){
 		currencies = currencyController.getAllCurrencys();
 		return currencies;
+	}
+	
+	public String convert(){
+		return "ok!";
 	}
 }

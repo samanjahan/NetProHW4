@@ -37,21 +37,22 @@
 									<td><h:inputText for="currencyCode" class="form-control" />
 									</td>
 									<td>
-									<h:selectOneMenu>
+									<h:selectOneListbox>
 										<c:forEach var="item" items='${currencyManager.currencies}'>
-											<f:selectItem  value="${currencyManager.fromCurrency}" itemLabel="${item}" itemValue="${currencyManager.fromCurrency}"></f:selectItem>						
-									</c:forEach></h:selectOneMenu></td>
-								<td>
-									<h:selectOneMenu>
+											<f:converter converterId="keyConverter"/>
+											<f:selectItem  value="${currencyManager.fromCurrency}" itemLabel="${item}"></f:selectItem>						
+									</c:forEach></h:selectOneListbox></td>
+									<td>
+									<h:selectOneListbox>
 										<c:forEach var="item" items='${currencyManager.currencies}'>
-											<f:selectItem  itemLabel="${item}"></f:selectItem>						
-									</c:forEach></h:selectOneMenu></td>
-									<td><h:outputText value="haha"></h:outputText></td>
+											<f:converter converterId="keyConverter"/>
+											<f:selectItem  value="${currencyManager.toCurrency}" itemLabel="${item}"></f:selectItem>						
+									</c:forEach></h:selectOneListbox></td>
 								
 							</tr>
 						</table>
 							<h:commandButton value="Create Currency"
-										action="#{currencyManager.remove}"
+										action="${currencyManager.convert}"
 										class="btn btn-primary" />
 						</h:form>
 					</div>
