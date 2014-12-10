@@ -17,17 +17,13 @@ public class cConverter implements Converter {
 	
 
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		System.out.println("in converter " + value);
 		CurrencyDTO currency;
 		currency = cf.findCurrency(value);
-		//currency = cf.findCurrencyByName(value);
-		System.out.println("in converter after cf " + currency);
 		return currency;
 	}
 
 	public String getAsString(FacesContext context, UIComponent component, Object object) {
 		CurrencyDTO currency = (CurrencyDTO)object;
-		System.out.println("inside converter To string " + currency.toString());
 		return currency.toString();
 	}
  

@@ -21,7 +21,7 @@ public class CurrencyManager implements Serializable {
     private CurrencyFacade currencyFacade;
 	private CurrencyDTO currentCurrency;
     private String chosenCurrency;
-    private CurrencyDTO chosenCurrency2;
+    private CurrencyDTO chosenCurrencyForUpdate;
 	private String newCountryName;
     private String newCurrencyName;
     private String newCurrencyCode;
@@ -117,11 +117,15 @@ public class CurrencyManager implements Serializable {
         } catch (Exception e) {
             handleException(e);
         }
+        newCountryName = "";
+        newCurrencyName = "";
+        newCurrencyCode = "";
+        newExchangeRate = null;
+        
         return jsf22Bugfix();
     }
     
     public String deleteCurrency() {
-    	System.out.println("Delete " + chosenCurrency);
     	try {
             startConversation();
             transactionFailure = null;
@@ -132,15 +136,16 @@ public class CurrencyManager implements Serializable {
         return jsf22Bugfix();
     }
     
-    public String deleteCurrency2() {
-    	System.out.println("Delete " + chosenCurrency2);
+    public String updateCurrency() {
+    	System.out.println("Update " + chosenCurrencyForUpdate + " to " +  newExchangeRate);
     	try {
             startConversation();
             transactionFailure = null;
-            currencyFacade.deleteCurrency(chosenCurrency2);
+            currencyFacade.updateCurrency(chosenCurrencyForUpdate, newExchangeRate);
         } catch (Exception e) {
             handleException(e);
         }
+    	newExchangeRate = null;
         return jsf22Bugfix();
     }
 
@@ -204,23 +209,21 @@ public class CurrencyManager implements Serializable {
 	}
 	
     public String getChosenCurrency() {
-    	System.out.println("Get Chosen " + chosenCurrency);
 		return chosenCurrency;
 	}
 
 	public void setChosenCurrency(String chosenCurrency) {
-		System.out.println("Set Chosen " + chosenCurrency);
 		this.chosenCurrency = chosenCurrency;
 	}
 	
-    public CurrencyDTO getChosenCurrency2() {
-    	System.out.println("Get Chosen2 " + chosenCurrency2);
-    	return chosenCurrency2;
+    public CurrencyDTO getChosenCurrencyForUpdate() {
+    	System.out.println("Get Chosen2 " + chosenCurrencyForUpdate);
+    	return chosenCurrencyForUpdate;
 	}
 
-	public void setChosenCurrency2(CurrencyDTO chosenCurrency2) {
-		System.out.println("Set Chosen2 " + chosenCurrency2);
-		this.chosenCurrency2 = chosenCurrency2;
+	public void setChosenCurrencyForUpdate(CurrencyDTO chosenCurrencyForUpdate) {
+		System.out.println("Set Chosen2 " + chosenCurrencyForUpdate);
+		this.chosenCurrencyForUpdate = chosenCurrencyForUpdate;
 	}
 	
 	public String convert(){

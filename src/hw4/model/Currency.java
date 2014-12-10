@@ -1,10 +1,12 @@
 package hw4.model;
 
 import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.String;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Entity implementation class for Entity: Currency
@@ -12,8 +14,9 @@ import javax.persistence.*;
  */
 @NamedQueries({
 	@NamedQuery(name = "findAllCurrencies", query = "SELECT Name FROM Currency Name"),
-	@NamedQuery(name = "deleteCurrencyByName", query = "DELETE FROM Currency Name where Name.currencyName = :currencyName"),
-	@NamedQuery(name = "findCurrencyByName", query = "SELECT Name FROM Currency Name where Name.currencyName = :currencyName")})
+	@NamedQuery(name = "deleteCurrencyByName", query = "DELETE FROM Currency Name WHERE Name.currencyName = :currencyName"),
+	@NamedQuery(name = "updateCurrency", query = "UPDATE Currency c SET c.baseCurrencyRate = :newRate WHERE c.currencyCode = :currencyName"),
+	@NamedQuery(name = "findCurrencyByName", query = "SELECT Name FROM Currency Name WHERE Name.currencyName = :currencyName")})
 
 @Entity
 public class Currency implements Serializable, CurrencyDTO {

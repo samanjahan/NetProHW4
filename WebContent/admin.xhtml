@@ -85,14 +85,20 @@
 							</div>
 						</h:form>
 						<br />
-						<h3>Delete Currency 2</h3>
+						<h3>Updates Currency 2</h3>
 						<h:form>
-							<h:selectOneListbox id="c2" value="#{currencyManager.chosenCurrency2}" converter="cConverter">
-								<f:selectItems value="#{currencyManager.currencies}" var="currency" itemValue="#{currency}"/>
+							<h:outputLabel for="updateCurrency" value="New Exchange rate: " />
+							<h:inputText id="updateCurrency"
+								value="#{currencyManager.newExchangeRate}" required="true" />
+							<h:selectOneListbox id="c2"
+								value="#{currencyManager.chosenCurrencyForUpdate}"
+								converter="cConverter">
+								<f:selectItems value="#{currencyManager.currencies}"
+									var="currency" itemValue="#{currency}" />
 							</h:selectOneListbox>
 							<div class="col-lg-8 col-xs-8">
-								<h:commandButton value="Delete2"
-									action="#{currencyManager.deleteCurrency2}"
+								<h:commandButton value="Update"
+									action="#{currencyManager.updateCurrency}"
 									class="btn btn-primary" />
 							</div>
 						</h:form>
